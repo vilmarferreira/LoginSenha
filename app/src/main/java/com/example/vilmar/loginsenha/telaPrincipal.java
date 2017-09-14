@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class telaPrincipal extends AppCompatActivity {
 
@@ -22,6 +23,7 @@ public class telaPrincipal extends AppCompatActivity {
 
     public void OnClickLogar (View v)
     {
+
         if((vrEditLogin.getText().toString().equals("Vilmar")&&vrEditSenha.getText().toString().equals("123456"))
                 || (vrEditLogin.getText().toString().equals("admin")&&vrEditSenha.getText().toString().equals("admin")))
         {
@@ -33,11 +35,12 @@ public class telaPrincipal extends AppCompatActivity {
         }
         else
         {
-            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle("Erro!");
-            alertDialog.setMessage("Nome de usuário e/ou senha incorretos!!");
-            alertDialog.show();
+            alert("Usuário ou senha incorreta");
         }
+    }
+    public void alert (String a)
+    {
+        Toast.makeText(this, a, Toast.LENGTH_SHORT).show();
     }
 
     public void onActivityResult(int codTela, int result, Intent dados)
@@ -49,8 +52,10 @@ public class telaPrincipal extends AppCompatActivity {
         if(codTela==COD_SEGUNDA_TELA)
         {
             Bundle bundle= dados.getExtras();
-            String login=bundle.getString("Login");
-            login=login;
+            String login=bundle.getString("login");
+            vrEditSenha.setText("");
+            vrEditLogin.setText(login);
         }
     }
+
 }
